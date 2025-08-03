@@ -5,7 +5,9 @@ from PIL import Image
 from transformers import BlipProcessor, BlipModel, BertModel, BertTokenizer
 
 class FeatureExtractor:
-    def __init__(self, device='cpu'):
+    def __init__(self, device=None):
+        if device is None:
+            device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.device = device
 
         # Visual feature extractor (ResNet-101)
