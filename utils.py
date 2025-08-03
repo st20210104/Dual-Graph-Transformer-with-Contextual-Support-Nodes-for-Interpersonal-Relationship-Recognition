@@ -5,7 +5,8 @@ import numpy as np
 from sklearn.metrics import accuracy_score, average_precision_score
 from feature_extraction import FeatureExtractor
 
-extractor = FeatureExtractor(device='cpu')
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+extractor = FeatureExtractor(device=device)
 
 def create_pair_centric_graph(personA_img=None, personB_img=None, num_features=128):
     g = dgl.graph(([], []))
